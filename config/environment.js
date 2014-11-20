@@ -43,5 +43,14 @@ module.exports = function(environment) {
 
   }
 
+  ENV.contentSecurityPolicy = {
+    'default-src': "'none'",
+    'script-src': "'self' localhost:35729 'unsafe-eval'",
+    'font-src': "'self'",
+    'connect-src': "'self' wss://*.firebaseio.com localhost:35729",
+    'img-src': "'self'",
+    'style-src': "'self'",
+    'media-src': "'self'"
+  }
   return ENV;
 };

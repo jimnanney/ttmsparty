@@ -1,0 +1,10 @@
+<div class="form-group">
+  {{input value=slide.image class="form-control" placeholder="Slide Image URL"}}
+</div>
+<button class="btn btn-primary" {{action "saveSlide"}}>Save</button>
+<ul>
+{{#each slide in arrangedContent}}
+<li>{{#link-to 'slide' slide}}{{slide.image}}{{/link-to}}</li>
+{{/each}}
+</ul>
+{{outlet}}
