@@ -4,7 +4,10 @@
 <div class="col-md-10 col-md-offset-1">
 <section class="panel panel-default">
 <table class="table table-hover table-striped">
-<thead>
+<thead class="table-headers">
+<tr>
+<th colspan="5"><h3>Clues</h3></th>
+</tr>
 <tr>
 <th>Category</th>
 <th>Question</th>
@@ -23,6 +26,13 @@
     <td>{{#link-to 'clues.edit' clue }}<i class="fa fa-edit fa-2x"></i>{{/link-to}}</td> 
   </tr>
 {{/each}}
+<tfoot class="table-footer">
+<tr>
+<td colspan="5">
+<p>This is where you would normally add pager buttons, page information, page counts, and record counts.  But without knowing enough information, it can get very awkward</p>
+</td>
+</tr>
+</tfoot>
 </tbody>
 </table>
 </section>
