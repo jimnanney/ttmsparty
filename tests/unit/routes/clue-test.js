@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('route:clue', 'ClueRoute', {
+moduleFor('route:clues', 'ClueRoute', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
