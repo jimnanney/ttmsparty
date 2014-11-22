@@ -1,0 +1,10 @@
+<ul>
+{{#each clue in arrangedContent}}
+  <li>
+    {{#link-to 'clues.delete' clue }}<i class="fa fa-trash"></i>{{/link-to}} - 
+    {{#link-to 'clues.edit' clue }}<i class="fa fa-edit"></i>{{/link-to}} - 
+    {{clue.question}}
+  </li>
+{{/each}}
+</ul>
+{{outlet}}
