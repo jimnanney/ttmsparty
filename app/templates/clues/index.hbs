@@ -1,10 +1,31 @@
-<ul>
+<h1>Clues</h1>
+<hr />
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+<section class="panel panel-default">
+<table class="table table-hover table-striped">
+<thead>
+<tr>
+<th>Category</th>
+<th>Question</th>
+<th>Answer</th>
+<th>Delete</th>
+<th>Edit</th>
+</tr>
+</thead>
+<tbody>
 {{#each clue in arrangedContent}}
-  <li>
-    {{#link-to 'clues.delete' clue }}<i class="fa fa-trash"></i>{{/link-to}} - 
-    {{#link-to 'clues.edit' clue }}<i class="fa fa-edit"></i>{{/link-to}} - 
-    {{clue.question}}
-  </li>
+  <tr>
+    <td>{{clue.category}}</td>
+    <td>{{clue.question}}</td>
+    <td>{{clue.answer}}</td>
+    <td>{{#link-to 'clues.delete' clue }}<i class="fa fa-trash"></i>{{/link-to}}</td> 
+    <td>{{#link-to 'clues.edit' clue }}<i class="fa fa-edit"></i>{{/link-to}}</td> 
+  </tr>
 {{/each}}
-</ul>
+</tbody>
+</table>
+</section>
+</div>
+</div>
 {{outlet}}
