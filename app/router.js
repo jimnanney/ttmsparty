@@ -14,6 +14,8 @@ Router.map(function() {
     this.route('delete', { path: '/:id/delete' });
     this.route('new');
   });
+  this.resource('trivia', { path: '/trivia' }, function() {
+  } );
 });
 
 export default Router;
