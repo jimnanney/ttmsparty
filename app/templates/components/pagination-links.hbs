@@ -1,0 +1,23 @@
+{{#if showPagination}}
+  <nav>
+    <ul class="pagination pagination-centered">
+      <li {{bind-attr class="hasPrevious::disabled"}}>
+        {{#link-to (query-params page=prevPage)}}&laquo;{{/link-to}}
+      </li>
+      {{#if showBeforeEllipsis}}
+        {{pagination-page page=1 currentPage=page}}
+        <li class="disabled"><a>&hellip;</a></li>
+      {{/if}}
+      {{#each pageNumber in visiblePages}}
+        {{pagination-page page=pageNumber currentPage=page action="gotoPage"}}
+      {{/each}}
+      {{#if showAfterEllipsis}}
+        <li class="disabled"><a>&hellip;</a></li>
+        {{pagination-page page=lastPage currentPage=page}}
+      {{/if}}
+      <li {{bind-attr class="hasNext::disabled"}}>
+        {{#link-to (query-params page=nextPage)}}&raquo;{{/link-to}}
+      </li>
+    </ul>
+  </nav>
+{{/if}}

@@ -1,41 +1,65 @@
 <h1>Clues</h1>
 <hr />
 <div class="row">
-<div class="col-md-10 col-md-offset-1">
-<section class="panel panel-default">
-<table class="table table-hover table-striped">
-<thead class="table-headers">
-<tr>
-<th colspan="5"><h3>Clues</h3></th>
-</tr>
-<tr>
-<th>Category</th>
-<th>Question</th>
-<th>Answer</th>
-<th>Delete</th>
-<th>Edit</th>
-</tr>
-</thead>
-<tbody>
-{{#each clue in arrangedContent}}
-  <tr>
-    <td>{{clue.category}}</td>
-    <td>{{clue.question}}</td>
-    <td>{{clue.answer}}</td>
-    <td>{{#link-to 'clues.delete' clue }}<i class="fa fa-trash fa-2x"></i>{{/link-to}}</td> 
-    <td>{{#link-to 'clues.edit' clue }}<i class="fa fa-edit fa-2x"></i>{{/link-to}}</td> 
-  </tr>
-{{/each}}
-<tfoot class="table-footer">
-<tr>
-<td colspan="5">
-<p>This is where you would normally add pager buttons, page information, page counts, and record counts.  But without knowing enough information, it can get very awkward</p>
-</td>
-</tr>
-</tfoot>
-</tbody>
-</table>
-</section>
-</div>
+  <div class="col-md-10 col-md-offset-1">
+    <section class="panel panel-default">
+      <table class="table table-hover table-striped">
+        <caption>
+          <h3>Clues</h3>
+          {{#if category}}
+          <small>Filter: </small>
+          {{#link-to (query-params category='') class="btn btn-primary btn-xs"}}
+          {{category}} 
+          <span class="badge"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></span>
+          {{/link-to}}
+          {{/if}}
+          <div class="pull-right form-inline">
+            <div class="form-group">
+              <label for="search" class=""><span class="sr-only">Search:</span></label>
+              <div class="input-group">
+                {{input type="search" class="form-control" value=q placeholder="Enter Search Text..."}}
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+            </div>
+          </div>
+        </caption>
+        <thead class="table-headers">
+          <tr>
+            <th>{{#link-to 'clues' (query-params sort="category")}}Category{{/link-to}}</th>
+            <th>{{#link-to 'clues' (query-params sort="quesiton")}}Question{{/link-to}}</th>
+            <th>{{#link-to 'clues' (query-params sort="answer")}}Answer{{/link-to}}</th>
+            <th class="toolbar">
+              {{#link-to 'clues.new' class="btn btn-primary"}}<i class="fa fa-plus"></i>{{/link-to}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each clue in paginatedContent}}
+          <tr>
+            <td>{{#link-to 'clues' (query-params category=clue.category)}}{{clue.category}}{{/link-to}}</td>
+            <td>{{clue.question}}</td>
+            <td>{{clue.answer}}</td>
+            <td class="toolbar">
+              <div class="btn-toolbar">
+                <button class="btn btn-primary" {{action "deleteRecord" clue}}><i class="fa fa-trash"></i></button>
+                {{#link-to 'clues.edit' clue class="btn btn-primary"}}<i class="fa fa-edit"></i>{{/link-to}}
+              </div>
+            </td> 
+          </tr>
+          {{/each}}
+        </tbody>
+          <tfoot class="table-footer">
+            <tr>
+              <td colspan="2">
+                <p>Showing {{first}} to {{last}} of {{total}} Records</p>
+              </td>
+              <td colspan="2">
+                {{pagination-links page=page pages=pages class="pull-right"}}
+              </td>
+            </tr>
+          </tfoot>
+      </table>
+    </section>
+  </div>
 </div>
 {{outlet}}
