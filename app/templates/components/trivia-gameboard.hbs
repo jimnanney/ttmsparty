@@ -1,1 +1,25 @@
-{{yield}}
+<div class="question-modal">
+  <div class="question" {{action "showAnswer" on="click"}}>
+    <div class="centerbox">
+      <p>{{selectedClue.question}}</p>
+    </div>
+  </div>
+  <div class="answer" {{action "hideQuestionModal" on="click"}}>
+    <div class="centerbox">
+      <p>{{selectedClue.answer}}</p>
+    </div>
+  </div>
+</div>
+  <div class="triviarow">
+    {{#each category in categories}}
+    <div class="category">{{category}}</div>
+    {{/each}}
+  </div>
+
+  {{#each row in rows}}
+  <div class="triviarow">
+    {{#each clue in row.clues}}
+    <div class="clue" {{action "showQuestion" clue on="click"}}><span {{bind-attr class="clue.revealed:hidden"}}>{{clue.valueLabel}}</span></div>
+    {{/each}}
+  </div>
+  {{/each}}
