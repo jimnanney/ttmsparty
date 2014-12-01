@@ -102,3 +102,6 @@ html, body {
   vertical-align: middle;
 }
 
+[data-ember-action] {
+  cursor: pointer;
+}
