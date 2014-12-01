@@ -65,7 +65,7 @@ export default Ember.ArrayController.extend({
         exp = '';
       }
       filtered = filtered.filter(function(record) {
-        return record.get('question').match(exp) || record.get('answer').match(exp) || record.get('category').match(exp);
+        return record.get('question').match(exp) || record.get('answer').match(exp) || record.get('category').match(exp) || record.get('hint').match(exp);
       });
     }
     return filtered;

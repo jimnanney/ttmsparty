@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['gameboard'],
-  attributeBindings: ['clues', 'categories'],
   model: null,
   clues: Ember.A([]),
   rows: function() {
@@ -22,6 +21,7 @@ export default Ember.Component.extend({
               valueLabel: '$100',
               question: 'Who starred in Slumdog Millionaire?',
               answer: 'No one of note',
+              hint: null,
               category: 'Movies',
               revealed: false
             },
@@ -36,6 +36,7 @@ export default Ember.Component.extend({
               valueLabel: '$100',
               question: 'What profession was Tom Cruise when Risky Business was made?',
               answer: 'Actor',
+              hint: 'Not telling',
               category: 'Risky Business',
               revealed: false
             },
@@ -43,6 +44,7 @@ export default Ember.Component.extend({
               valueLabel: '$100',
               question: 'What hobbies does Jim have?',
               answer: 'hobbies? No time with all the programming',
+              hint: 'Not telling',
               category: 'Hobbies',
               revealed: false
             },
@@ -50,6 +52,8 @@ export default Ember.Component.extend({
               valueLabel: '$100',
               question: 'What kind of ship is the Nimitz?',
               answer: 'Carrier',
+              hint: 'Not telling',
+              category: 'Hardships',
               revealed: false
             }
           ]
@@ -61,6 +65,7 @@ export default Ember.Component.extend({
               valueLabel: '$200',
               question: 'What movie has the kid who sees dead people?',
               answer: 'The Sixth Sense',
+              hint: 'Not telling',
               category: 'Movies',
               revealed: false
             },
@@ -68,6 +73,7 @@ export default Ember.Component.extend({
               valueLabel: '$200',
               question: 'Who is the most popular NASCAR driver?',
               answer: 'Dale Earnhardt Jr.',
+              hint: 'Not telling',
               category: 'Sports',
               revealed: false
             },
@@ -75,6 +81,7 @@ export default Ember.Component.extend({
               valueLabel: '$200',
               question: 'Why does Tom Cruise need to raise money in Risky Business?',
               answer: 'He has to buy back a Faberge Egg',
+              hint: 'Not telling',
               category: 'Risky Business',
               revealed: false
             },
@@ -82,6 +89,7 @@ export default Ember.Component.extend({
               valueLabel: '$200',
               question: 'What Hobby supply store is not closed on Sundays?',
               answer: "Michael's",
+              hint: 'Not telling',
               category: 'Hobbies',
               revealed: false
             },
@@ -89,6 +97,8 @@ export default Ember.Component.extend({
               valueLabel: '$200',
               question: 'What kind of ship is the Enterprise?',
               answer: 'Spaceship',
+              hint: 'Not telling',
+              category: 'Hardships',
               revealed: false
             }
           ]
@@ -108,20 +118,37 @@ export default Ember.Component.extend({
         }
       }));
   },
+  keyUp: function(e)
+  {
+    console.log(e);
+  },
   actions: {
+    showAnswer: function() {
+      this.$('.question, .hint').removeClass('displayed');
+      this.applyAnimation('.answer', 'flipInX');
+      return true;
+    },
+    showHint: function() {
+      this.$('.question').removeClass('displayed');
+      this.applyAnimation('.hint', 'flipInX');
+      return true;
+    },
+    hideQuestionModal: function() {
+      this.$('.answer, .hint').removeClass('displayed');
+      this.applyAnimation('.question-modal', 'zoomOut', true);
+      this.set('selectedClue.revealed', true);
+      return true;
+    },
     showQuestion: function(clue) {
       if (clue.revealed) { return; }
       this.set('selectedClue', clue);
       this.applyAnimation('.question-modal, .question', 'zoomIn');
-    },
-    showAnswer: function() {
-      this.$('.question').removeClass('displayed');
-      this.applyAnimation('.answer', 'flipInX');
-    },
-    hideQuestionModal: function() {
-      this.$('.answer').removeClass('displayed');
-      this.applyAnimation('.question-modal', 'zoomOut', true);
-      this.set('selectedClue.revealed', true);
+      return true;
     }
+  },
+  // Must have a tabindex and have focus to receive  keyboard events
+  didInsertElement: function(){
+     this.$().attr('tabindex',0);
+     this.$().focus();
   }
 });

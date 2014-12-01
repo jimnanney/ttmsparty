@@ -2,6 +2,14 @@
   <div class="question" {{action "showAnswer" on="click"}}>
     <div class="centerbox">
       <p>{{selectedClue.question}}</p>
+      {{#if selectedClue.hint}}
+      <a {{action "showHint" bubbles=false}} class="hintButton"><i class="fa fa-lightbulb-o"></i></a>
+      {{/if}}
+    </div>
+  </div>
+  <div class="hint" {{action "showAnswer" on="click"}}>
+    <div class="centerbox">
+      <p>{{selectedClue.hint}}</p>
     </div>
   </div>
   <div class="answer" {{action "hideQuestionModal" on="click"}}>

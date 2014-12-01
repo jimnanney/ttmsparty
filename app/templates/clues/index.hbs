@@ -27,6 +27,7 @@
           <tr>
             <th>{{#link-to 'clues' (query-params sort="category")}}Category{{/link-to}}</th>
             <th>{{#link-to 'clues' (query-params sort="quesiton")}}Question{{/link-to}}</th>
+            <th>{{#link-to 'clues' (query-params sort="hint")}}Hint{{/link-to}}</th>
             <th>{{#link-to 'clues' (query-params sort="answer")}}Answer{{/link-to}}</th>
             <th class="toolbar">
               {{#link-to 'clues.new' class="btn btn-primary"}}<i class="fa fa-plus"></i>{{/link-to}}
@@ -38,6 +39,7 @@
           <tr>
             <td>{{#link-to 'clues' (query-params category=clue.category)}}{{clue.category}}{{/link-to}}</td>
             <td>{{clue.question}}</td>
+            <td>{{clue.hint}}</td>
             <td>{{clue.answer}}</td>
             <td class="toolbar">
               <div class="btn-toolbar">
@@ -53,7 +55,7 @@
               <td colspan="2">
                 <p>Showing {{first}} to {{last}} of {{total}} Records</p>
               </td>
-              <td colspan="2">
+              <td colspan="3">
                 {{pagination-links page=page pages=pages class="pull-right"}}
               </td>
             </tr>
