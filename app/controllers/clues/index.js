@@ -55,6 +55,9 @@ export default Ember.ArrayController.extend({
     var filtered = this.get('arrangedContent');
     var q = this.get('q');
     var exp;
+    var matches = function(property, exp) {
+      return (typeof property !== "undefined") && property.match(exp);
+    };
     if (category) {
       filtered = filtered.filterBy('category', category);
     }
@@ -65,7 +68,7 @@ export default Ember.ArrayController.extend({
         exp = '';
       }
       filtered = filtered.filter(function(record) {
-        return record.get('question').match(exp) || record.get('answer').match(exp) || record.get('category').match(exp) || record.get('hint').match(exp);
+        return matches(record.get('question'), exp) || matches(record.get('answer'), exp) || matches(record.get('category'), exp) || matches(record.get('hint'), exp);
       });
     }
     return filtered;
